@@ -3,10 +3,9 @@ routes for different api versions
 """
 
 
-import sys
-from backend.authly.core.log import Logger, LogLevel
-from backend.authly.api.api_v1.api import api_router as api_v1
-from backend.authly.core.config import application_config
+from authly.core.utils.log import Logger, LogLevel
+from authly.api.api_v2.api import api_v2_router as api_v2
+from authly.core.config import application_config
 from fastapi import APIRouter
 
 API_CONFIG = application_config.API  # type: ignore
@@ -25,32 +24,21 @@ def check_api_paths(f, s) -> bool:
     return True
 
 
-def activate_api(
-    main_path: str,
-    api_route: str,
-    api_version: str,
-    api: APIRouter,
-    main_router: APIRouter,
-) -> bool:
-    Logger.log(
-        LogLevel.INFO,
-        f"api ({api_version}) is available at:",
-        f"        \\__ https://example.com{main_path}{api_route}",
-    )
-    main_router.include_router(api, prefix=api_route)
-    return True
+# if API_V1.API_V1_ACTIVE is True:
+#     Logger.log(
+#         LogLevel.INFO,
+#         "api version 1 is available at:",
+#         f"        \\__ https://example.com{API_ROUTE}{API_V1.API_V1_ROUTE}",
+#     )
+#     api_main_router.include_router(api_v1, prefix=API_V1.API_V1_ROUTE)
 
+Logger.log(
+    LogLevel.INFO,
+    "devlopment/testing api is available at:",
+    f"        \\__ https://example.com{API_ROUTE}/v2",
+)
 
-def main(stop: bool = False):
-    if stop:
-        sys.exit()
-
-    activate_api(
-        API_ROUTE, API_V1.API_V1_ROUTE, "API_V1", api_v1, api_main_router
-    )
-
-
-main(check_api_paths(API_V1.API_V1_ROUTE, API_V2.API_V2_ROUTE))
+api_main_router.include_router(api_v2, prefix="/v2")
 
 
 @api_main_router.get("/")

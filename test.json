@@ -1,0 +1,28 @@
+{
+  "bubbleA": {
+    "_id": "ObjectId(objectidforbubblea)",
+    "name": "bubbleA",
+    "user": [
+      {
+        "_id": "ObjectId(user_id_1)",
+        "username": "user1",
+        "email": "user1@example.com",
+        "roles": ["user"],
+        "resources": []
+      }
+    ]
+  },
+  "bubbleB": {
+    "_id": "ObjectId(objectidforbubbleb)",
+    "name": "Collname1337",
+    "user": [
+      {
+        "_id": "ObjectId(user_id_1)",
+        "username": "user1",
+        "email": "user1@example.com",
+        "roles": ["user"],
+        "resources": []
+      }
+    ]
+  }
+}

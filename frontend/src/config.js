@@ -1,7 +1,7 @@
 const config = {
 	backend: {
 		host: '0.0.0.0',
-		containerId: 'your-backend-container-id'
+		bubbleId: 'your-backend-bubble-id'
 	}
 };
 

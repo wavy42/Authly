@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "setup"
+version = "0.1.0"
+description = "setup tool for authly backend"
+authors = ["ily-Ben <ilyben.github@proton.me>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+requests = "^2.31.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

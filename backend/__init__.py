@@ -1,10 +1,26 @@
 import importlib
 import os
-import logging
-from datetime import datetime
 
 
-def check_dependencies():
+def check_dependencies(dependencies: list):
+    for dependency in dependencies:
+        try:
+            importlib.import_module(dependency)
+        except ImportError:
+            raise ImportError(
+                f"The dependency {dependency} "
+                "is not installed or not reachable."
+            )
+        print(f"{dependency}")
+
+
+def print_logo(col, file_path: str = "./ascii_art.txt"):
+    with open(file_path, "r") as file:
+        ascii_art = file.read()
+        print(f"{col}{ascii_art}")
+
+
+def main():
     dependencies_to_check = [
         "colorama",
         "fastapi",
@@ -16,45 +32,9 @@ def check_dependencies():
         "exrex",
     ]
 
-    for dependency in dependencies_to_check:
-        try:
-            importlib.import_module(dependency)
-        except ImportError:
-            raise ImportError(
-                f"The dependency {dependency}"
-                "is not installed or not reachable."
-            )
-        logging.info(f"{dependency}")
-
-
-def print_logo(col, file_path: str = "./ascii_art.txt"):
-    with open(file_path, "r") as file:
-        ascii_art = file.read()
-        print(f"{col}{ascii_art}")
-
-
-def log_basic_config(path, base_path):
-    log_directory = os.path.join(base_path, "log")
-    os.makedirs(log_directory, exist_ok=True)
-
-    log_file = datetime.now().strftime("%Y-%m-%d_%H-%M-%S") + "_checks.log"
-    log_file_path = os.path.join(log_directory, log_file)
-
-    logging.basicConfig(
-        filename=log_file_path,
-        level=logging.DEBUG,
-        format="%(asctime)s - %(levelname)s - %(message)s",
-    )
-    return log_file_path
-
-
-def main():
-    module_directory = os.path.dirname(__file__)
     base_path = os.path.dirname(os.path.abspath(__file__))
 
-    log_basic_config(module_directory, base_path=base_path)
-
-    check_dependencies()
+    check_dependencies(dependencies_to_check)
 
     from colorama import Fore
 

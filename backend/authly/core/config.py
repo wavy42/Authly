@@ -6,7 +6,7 @@ It reads a JSON file and validates it against a predefined Pydantic model.
 import os
 import json
 from pydantic_settings import BaseSettings
-from authly.core.log import Logger, LogLevel
+from authly.core.utils.log import Logger, LogLevel
 
 
 ############################################################
@@ -275,47 +275,28 @@ class AppConfig(BaseSettings):
 
 
 def check_file(file_name):
-    try:
-        # Get the directory of the current script or module
-        script_directory = os.path.dirname(os.path.realpath(__file__))
+    # Get the directory of the current script or module
+    script_directory = os.path.dirname(os.path.realpath(__file__))
 
-        # Move up one directory to reach the parent directory
-        parent_directory = os.path.abspath(
-            os.path.join(script_directory, os.pardir)
-        )
+    # Move up one directory to reach the parent directory
+    parent_directory = os.path.abspath(
+        os.path.join(script_directory, os.pardir, os.pardir, os.pardir)
+    )
+    # Construct the relative path to the JSON file in the parent directory
+    json_file_path = os.path.join(parent_directory, "config", file_name)
 
-        # Construct the relative path to the JSON file in the parent directory
-        json_file_path = os.path.join(
-            parent_directory, "config_temp", file_name
-        )
+    Logger.log(LogLevel.DEBUG, "JSON file path:", f"{json_file_path}")
 
-        Logger.log(LogLevel.DEBUG, "JSON file path:", f"{json_file_path}")
-
-        # Load JSON file
-        with open(json_file_path, encoding="utf-8") as f:
-            data = json.load(f)
-        return data
-
-    except FileNotFoundError as e:
-        Logger.log(LogLevel.ERROR, f"File not found error: {e}")
-    except json.JSONDecodeError as e:
-        Logger.log(LogLevel.ERROR, f"JSON decoding error: {e}")
-    except Exception as e:
-        Logger.log(LogLevel.ERROR, f"An unexpected error occurred: {e}")
+    # Load JSON file
+    with open(json_file_path, encoding="utf-8") as f:
+        data = json.load(f)
+    return data
 
 
 def validate_config(data):
-    try:
-        return_data = AppConfig(**data)
-        return return_data
-
-    except Exception as e:
-        Logger.log(
-            LogLevel.ERROR,
-            "An error occurred while parsing the configuration data:",
-            f"Error details: {e}",
-        )
+    return_data = AppConfig(**data)
+    return return_data
 
 
-config_data = check_file("config.json")
+config_data = check_file("backend_config.json")
 application_config = validate_config(config_data)

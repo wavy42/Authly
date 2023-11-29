@@ -1,6 +1,6 @@
 # Authly Frontend Example
 
-This project serves as an example frontend implementation for Authly, a simple authentication system. Authly is designed to showcase backend integration with container IDs/keys for secure communication. This example uses Svelte, integrates Tailwind CSS, and is entirely client-sided.
+This project serves as an example frontend implementation for Authly, a simple authentication system. Authly is designed to showcase backend integration with bubble IDs/keys for secure communication. This example uses Svelte, integrates Tailwind CSS, and is entirely client-sided.
 
 ## Getting Started
 
@@ -18,21 +18,21 @@ npm install
 
 ### Configuration
 
-Before running the application, configure the backend container ID/key in the src/config.js file.
+Before running the application, configure the backend bubble ID/key in the src/config.js file.
 
 ```js
 // src/config.js
 const config = {
- // Other configurations...
- backend: {
-  containerId: 'your-backend-container-id'
- }
+	// Other configurations...
+	backend: {
+		bubbleId: 'your-backend-bubble-id'
+	}
 };
 
 export default config;
 ```
 
-Replace 'your-backend-container-id' with the actual container ID and key from your Authly backend.
+Replace 'your-backend-bubble-id' with the actual bubble ID and key from your Authly backend.
 
 ## Developing
 

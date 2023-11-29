@@ -1,7 +1,7 @@
 import asyncio
 
 from authly.core.db.redis_crud import RedisManager
-from authly.core.config import application_config
+from authly.config import application_config
 from authly.core.log import Logger, LogLevel
 
 redis_config = application_config.RedisdbSettings  # type: ignore

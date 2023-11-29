@@ -4,49 +4,49 @@ import pytest
 from fastapi import status
 
 
-@pytest.mark.asyncio
-async def test_hello_world(test_client: httpx.AsyncClient):
-    response = await test_client.get("/")
+class TestHelloWorld:
+    @pytest.mark.asyncio
+    async def test_hello_world(self, test_client: httpx.AsyncClient):
+        response = await test_client.get("/")
 
-    assert response.status_code == status.HTTP_200_OK
-    json = response.json()
-    assert json == {"msg": "Hello World"}
+        assert response.status_code == status.HTTP_200_OK
+        json = response.json()
+        assert json == {"msg": "Hello World"}
+
+    @pytest.mark.asyncio
+    async def test_api_hello_world(self, test_client: httpx.AsyncClient):
+        response = await test_client.get("/api/")
+
+        assert response.status_code == status.HTTP_200_OK
+        json = response.json()
+        assert json == {"msg": "Hello World"}
+
+    @pytest.mark.asyncio
+    async def test_api_v1_hello_world(self, test_client: httpx.AsyncClient):
+        response = await test_client.get("/api/v1/")
+
+        assert response.status_code == status.HTTP_200_OK
+        json = response.json()
+        assert json == {"msg": "Hello World"}
+
+    @pytest.mark.asyncio
+    async def test_api_v1_user_hello_world(
+        self, test_client: httpx.AsyncClient
+    ):
+        response = await test_client.get("/api/v1/user/")
+
+        assert response.status_code == status.HTTP_200_OK
+        json = response.json()
+        assert json == {"msg": "Hello World"}
 
 
-@pytest.mark.asyncio
-async def test_api_hello_world(test_client: httpx.AsyncClient):
-    response = await test_client.get("/api/")
+class TestApiPaths:
+    @pytest.mark.asyncio
+    async def test_api_paths_dup(self):
+        result = api_router.check_api_paths("Test", "Test")
+        assert result is False
 
-    assert response.status_code == status.HTTP_200_OK
-    json = response.json()
-    assert json == {"msg": "Hello World"}
-
-
-@pytest.mark.asyncio
-async def test_api_v1_hello_world(test_client: httpx.AsyncClient):
-    response = await test_client.get("/api/v1/")
-
-    assert response.status_code == status.HTTP_200_OK
-    json = response.json()
-    assert json == {"msg": "Hello World"}
-
-
-@pytest.mark.asyncio
-async def test_api_v1_user_hello_world(test_client: httpx.AsyncClient):
-    response = await test_client.get("/api/v1/user/")
-
-    assert response.status_code == status.HTTP_200_OK
-    json = response.json()
-    assert json == {"msg": "Hello World"}
-
-
-@pytest.mark.asyncio
-async def test_activate_api():
-    result = api_router.activate_api(
-        "API_ROUTE",
-        "API_V1.API_V1_ROUTE",
-        "API_V1",
-        api_router.api_v1,
-        api_router.api_main_router,
-    )
-    assert result is True
+    @pytest.mark.asyncio
+    async def test_api_paths(self):
+        result = api_router.check_api_paths("Test", "Test2")
+        assert result is True

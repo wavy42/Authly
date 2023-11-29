@@ -16,21 +16,41 @@ in the db collections:
 
 user/ applications in a collection also get there own object ids (`new ObjectId()`)
 
-### Admin collection
+### Bubble Collection
 
 currently:
 
 ```json
 {
-  "_id": "ObjectId(admin_id)",
+  "_id": {
+    "$oid": "exmaple oid of bubble collection"
+  },
+  "name": "string",
+  "settings": {
+    "allow_new_user_registration": true,
+    "test_settings": "HelloWorld",
+    "bliblablu": true
+  },
+  "application_document_id": "example oid 1",
+  "key_document_id": "example oid 2",
+  "user_document_id": "example oid 3"
+}
+```
+
+### Admin collection
+
+currently:
+
+directly ref to the document
+
+```json
+{
+  "_id": ObjectId("admin_id"),
   "username": "admin_username",
   "email": "admin_email",
   "password": "hashed_password",
   "roles": ["admin"],
-  "containers": [
-    { "ContainerA": "ObjectId(objectidforcontainera)" },
-    { "ContainerB": "ObjectId(objectidforcontainera)" }
-  ]
+  "bubbles": [ObjectId("objectidforbubblea"), ObjectId("objectidforbubbleb")]
 }
 ```
 
@@ -38,9 +58,9 @@ currently:
 
 ```json
 {
-  "ContainerA": {
-    "_id": "ObjectId(objectidforcontainera)",
-    "name": "ContainerA",
+  "bubbleA": {
+    "_id": "ObjectId(objectidforbubblea)",
+    "name": "bubbleA",
     "user": [
       {
         "_id": "ObjectId(user_id_1)",
@@ -51,9 +71,9 @@ currently:
       }
     ]
   },
-  "ContainerB": {
-    "_id": "ObjectId(objectidforcontainerb)",
-    "name": "ContainerB",
+  "bubbleB": {
+    "_id": "ObjectId(objectidforbubbleb)",
+    "name": "bubbleB",
     "user": [
       {
         "_id": "ObjectId(user_id_1)",
@@ -71,15 +91,15 @@ currently:
 
 ```json
 {
-  "ContainerA": {
-    "_id": "ObjectId(objectidforcontainera)",
-    "name": "ContainerA",
+  "bubbleA": {
+    "_id": "ObjectId(objectidforbubblea)",
+    "name": "bubbleA",
     "applications": [
       {
         "_id": "ObjectId(app_id_1)",
         "name": "App 1",
         "version": "1.0",
-        "default_access": "users of containera"
+        "default_access": "users of bubblea"
       },
       {
         "_id": "ObjectId(app_id_2)",
@@ -88,9 +108,9 @@ currently:
       }
     ]
   },
-  "ContainerB": {
-    "_id": "ObjectId(objectidforcontainerb)",
-    "name": "ContainerB",
+  "bubbleB": {
+    "_id": "ObjectId(objectidforbubbleb)",
+    "name": "bubbleB",
     "applications": []
   }
 }

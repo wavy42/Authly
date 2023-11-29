@@ -10,20 +10,7 @@ This project is currently under development and remains untested. As a result, i
 
 Thank you for your interest and support in this open-source initiative.
 
-## 🔍 Current Focus: Login Process and Database Operations
-
-While the project is a work in progress and not yet ready for deployment, our current focus lies in strengthening the login process and optimizing database operations, including data storage mechanisms. Our team is dedicated to ensuring secure and efficient data management, with plans to address other areas in the future.
-
-We greatly value any potential contributions and support from the community. We aim to make this project as robust and user-friendly as possible, building a strong foundation for future developments.
-
-TODO:
-
-- [x] rework mongodb crud (beanie maybe)
-- [ ] refactor some apiv1 stuff
-- [ ] add cookie based login (redis)
-- [ ] username checks for dup (auto add random num?)
-
-## 💼 Commercial Use
+## Commercial Use
 
 For any commercial use of this software, proper attribution to the original developer wavy42 is required, and a link to the original repository on GitHub must be provided.
 
@@ -68,20 +55,20 @@ We highly recommend writing tests for your application to ensure its reliability
 
 ## Credits
 
-🌟 Authly is developed by wavy42 & Arteii. 🚀
+Authly is developed by wavy42 & Arteii. 🚀
 
 We appreciate the contributions of all our collaborators and supporters. 🙏
 
-Frontend:
-[windmill-ui](https://windmillui.com/)
-[shadcn/ui](https://ui.shadcn.com/)
+**Frontend:** </br>
+[windmill-ui](https://windmillui.com/) </br>
+[shadcn/ui](https://ui.shadcn.com/) </br>
 
 ## License
 
 Authly is licensed under the MIT License with additional clauses:
 
-- **Copyleft Clause** 🔄 </br>
+- **Copyleft Clause** </br>
   Any modifications, adaptations, or derivative works based on this software must be made publicly available on GitHub with proper attribution to the original developer wavy42 by adding a link to the original repository.
 
-- **Commercial Use Attribution Clause** 💼 </br>
+- **Commercial Use Attribution Clause** </br>
   For any commercial use of this software, proper attribution to the original developer wavy42 is required, and a link to the original repository on GitHub must be provided.

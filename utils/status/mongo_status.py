@@ -1,7 +1,7 @@
 import asyncio
 from datetime import datetime
 from authly.core.db.mongo_crud import MongoDBManager
-from authly.core.config import application_config
+from authly.config import application_config
 from authly.core.log import Logger, LogLevel
 
 mongo_config = application_config.MongodbSettings  # type: ignore
